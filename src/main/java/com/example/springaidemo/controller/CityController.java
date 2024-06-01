@@ -37,7 +37,7 @@ public class CityController {
             withModel(OpenAiApi.ChatModel.GPT_3_5_TURBO.value).build();
 
     @GetMapping("/MessageTypes")
-    public ResponseEntity<String> messageTypes()  {
+    public ResponseEntity<String> messageTypes() {
         List<Message> messages = Arrays.asList(
                 new UserMessage("tell me about one interesting place in London."),
                 new SystemMessage("Put the result in html format so it will be nice to render in the web."),
@@ -49,7 +49,7 @@ public class CityController {
         );
 
         OpenAiChatOptions options = new OpenAiChatOptions.Builder().withModel(OpenAiApi.ChatModel.GPT_3_5_TURBO.value).build();
-        Prompt prompt = new Prompt(messages,options);
+        Prompt prompt = new Prompt(messages, options);
         ChatResponse response = chatClient.call(prompt);
         return ResponseEntity.ok(response.getResult().getOutput().getContent());
     }//localhost:8080/MessageTypes
@@ -57,8 +57,8 @@ public class CityController {
     public static final String userTemplate = """
             Give me information of city called {city}, and tell me the following details:
             - Name of the city
-            - Name of the country          
-            - Religion (in percentage)          
+            - Name of the country
+            - Religion (in percentage)
             - Number of population
             - GDP per capita in USD
             - Calling Code
@@ -70,7 +70,7 @@ public class CityController {
             {format}
             """;
     public static final String systemTemplate = """
-            Return the result in html table such that it will be nice to render in the web.       
+            Return the result in html table such that it will be nice to render in the web.
             Design the table to have 2 columns spanning 80% of the screen width, with font size of 20.
             Use as much height for each row as necessary to fit in the table contents.
             Add padding around the text and align the text to the middle of each table cell.
